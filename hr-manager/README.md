@@ -329,3 +329,18 @@ docker compose up -d --build     # build and start
 docker compose down              # stop
 docker compose logs -f backend   # backend logs
 docker compose ps                # container status
+
+
+
+cd hr-manager
+dir docker-compose.yml
+docker compose build
+docker compose push
+
+docker login
+docker compose pull
+docker compose up -d
+
+
+https://hub.docker.com/r/biplob798/hr-backend
+https://hub.docker.com/r/biplob798/hr-frontend
