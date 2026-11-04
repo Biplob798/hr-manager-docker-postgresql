@@ -307,3 +307,25 @@ docker compose logs backend
  cd /localdvd
  mount -o loop /localdvd/rhel-8.9-x86_64-dvd.iso /localdvd
 ################################################
+
+
+
+for linux machine deploy
+
+########################################
+
+mkdir /u01/app
+cd /u01/app
+git clone https://github.com/Biplob798/hr-manager-docker-postgresql.git
+cd hr-manager-docker-postgresql/hr-manager
+ls
+
+cp .env.example .env
+nano .env
+
+docker compose up -d --build
+
+docker compose up -d --build     # build and start
+docker compose down              # stop
+docker compose logs -f backend   # backend logs
+docker compose ps                # container status
