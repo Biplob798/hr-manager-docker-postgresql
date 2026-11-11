@@ -344,3 +344,40 @@ docker compose up -d
 
 https://hub.docker.com/r/biplob798/hr-backend
 https://hub.docker.com/r/biplob798/hr-frontend
+
+
+
+#################################################################
+For linux machine
+#################################################################
+
+Step 1: Allow Docker to connect to PostgreSQL
+
+
+echo "host  hrdb  hr  172.16.0.0/12  scram-sha-256" >> /var/lib/pgsql/16/data/pg_hba.conf
+
+echo "listen_addresses = '*'" >> /var/lib/pgsql/16/data/postgresql.conf
+
+firewall-cmd --permanent --zone=docker --add-port=5432/tcp
+
+firewall-cmd --reload
+
+
+Step 2: Restart PostgreSQL and Docker
+
+systemctl restart postgresql-16
+
+systemctl restart docker
+
+
+Step 3: Restart your app
+
+cd /u01/app/hr-manager-docker-postgresql/hr-manager
+
+docker compose up -d --force-recreate
+
+Step 4: Check and open the site
+
+sleep 10 && docker compose logs --tail 10 backend
+
+http://192.168.0.201/
